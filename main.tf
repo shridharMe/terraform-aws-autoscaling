@@ -31,7 +31,12 @@ resource "aws_launch_template" "this" {
   name        = var.launch_template_use_name_prefix ? null : local.launch_template_name
   name_prefix = var.launch_template_use_name_prefix ? "${local.launch_template_name}-" : null
   description = var.launch_template_description
-
+  dynamic "metadata_options" {
+   for_each= length(var.idmsv2_metadata_options) > 0 ? [var.idmsv2_metadata_options] : []
+   content {
+    http_tokens = metadata_options.value.http_tokens
+   }
+  }
   ebs_optimized = var.ebs_optimized
   image_id      = var.image_id
   key_name      = var.key_name

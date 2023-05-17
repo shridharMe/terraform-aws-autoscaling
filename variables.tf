@@ -556,3 +556,10 @@ variable "putin_khuylo" {
   type        = bool
   default     = true
 }
+
+
+ variable "idmsv2_metadata_options" {
+  description = "IMDS v2 (Instance Metadata Service)"
+  type        = map(string)
+  default     = {}
+}
